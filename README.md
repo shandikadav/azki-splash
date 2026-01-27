@@ -22,7 +22,7 @@ Since this package is not yet on the KDE Store, you can install it manually from
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/shandikadav/azki-splash.git](https://github.com/shandikadav/azki-splash.git)
+    git clone https://github.com/shandikadav/azki-splash.git
     cd azki-splash
     ```
 
