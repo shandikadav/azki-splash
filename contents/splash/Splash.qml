@@ -36,8 +36,10 @@ Rectangle {
                 
                 anchors.fill: parent
                 fillMode: Image.PreserveAspectCrop
-                
+                sourceSize.width:  parent.width  * Screen.devicePixelRatio
+                sourceSize.height: parent.height * Screen.devicePixelRatio
                 smooth: true
+                mipmap: true  
                 visible: true
             }
         }
