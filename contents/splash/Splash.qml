@@ -1,5 +1,5 @@
-import QtQuick
-import QtQuick.Window
+import QtQuick        
+import QtQuick.Window   
 
 Rectangle {
     id: root
@@ -7,51 +7,37 @@ Rectangle {
     property int stage
 
     onStageChanged: {
-        if (stage == 1) {
-            introAnimation.running = true;
-        } 
-        
+        if (stage === 1) {
+            introAnimation.start()
+        }
     }
 
-    Item {
-        id: content
+    AnimatedImage {
+        id: gifAnim
         anchors.fill: parent
+
+        source: "images/splash.gif"
+        fillMode: Image.PreserveAspectCrop
+
+        playing: false 
+
+        smooth: true
+        cache: false  
+        asynchronous: true  
+
         opacity: 0
-        
-        TextMetrics {
-            id: units
-            text: "M"
-            property int gridUnit: boundingRect.height
-        }
 
-        Rectangle {
-            id: imageContainer
-            anchors.fill: parent
-            color: "transparent"
+        OpacityAnimator {
+            id: introAnimation
+            target: gifAnim
+            from: 0
+            to: 1
+            duration: 800
+            easing.type: Easing.InOutQuad
 
-            AnimatedImage {
-                id: gifAnim
-                source: "images/splash.gif"
-                paused: false
-                
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectCrop
-                sourceSize.width:  parent.width  * Screen.devicePixelRatio
-                sourceSize.height: parent.height * Screen.devicePixelRatio
-                smooth: true
-                mipmap: true  
-                visible: true
+            onStarted: {
+                gifAnim.playing = true
             }
         }
-    }
-
-    OpacityAnimator {
-        id: introAnimation
-        running: false
-        target: content
-        from: 0
-        to: 1
-        duration: 1000 
-        easing.type: Easing.InOutQuad
     }
 }
